@@ -1,27 +1,43 @@
 import React, { Component } from 'react';
-import logo from './logo.svg';
-import './App.css';
+import UserOutput from './Components/UserOutput'
+import UserInput from './Components/UserInput'
 
 class App extends Component {
+
+  state = {
+    userName: 'Mark'
+  }
+
+  setUserName = newName => {
+    this.setState({ userName: 'Mark'})
+  }
+
+  onChangedHandler = event => {
+    this.setState({ userName: event.target.value})
+  }
+
   render() {
+
+    // it goes as an object
+    const style = {
+      'color':'#444',
+      'border': '2px solid #999',
+      'width': '200px',
+      'text-align': 'center'
+    }
+
     return (
-      <div className="App">
-        <header className="App-header">
-          <img src={logo} className="App-logo" alt="logo" />
-          <p>
-            Edit <code>src/App.js</code> and save to reload.
-          </p>
-          <a
-            className="App-link"
-            href="https://reactjs.org"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            Learn React
-          </a>
-        </header>
-      </div>
-    );
+      <React.Fragment>
+        <UserInput
+          changed={this.onChangedHandler.bind(this)}
+          initialValue={this.state.userName}
+        />
+        <UserOutput style={style} >{this.state.userName}</UserOutput>
+        <UserOutput>I</UserOutput>
+        <UserOutput>do</UserOutput>
+        <UserOutput />
+      </React.Fragment>
+    )
   }
 }
 
